@@ -57,6 +57,7 @@ public class ModuleManager {
         newMod(new FreeCam());
         newMod(new ShrekScript());
         newMod(new InstantLevels());
+        newMod(new NeverHungry());
 
         //RENDER
         newMod(new Fullbright());
