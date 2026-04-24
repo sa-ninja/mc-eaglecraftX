@@ -151,6 +151,10 @@ public class RenderChunk {
 			for (BlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(blockpos, blockpos1)) {
 				IBlockState iblockstate = regionrendercache.getBlockStateFaster(blockpos$mutableblockpos);
 				Block block = iblockstate.getBlock();
+				if (proclient.module.render.Xray.enabled && proclient.module.render.Xray.instance != null
+						&& !proclient.module.render.Xray.instance.shouldXrayBlock(block)) {
+					continue;
+				}
 				if (block.isOpaqueCube()) {
 					visgraph.func_178606_a(blockpos$mutableblockpos);
 				}
