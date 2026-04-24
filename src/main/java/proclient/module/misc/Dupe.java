@@ -19,16 +19,19 @@ public class Dupe extends Module {
     private final Random random = new Random();
 
     public void onEnable() {
-        EntityPlayerSP player = mc.thePlayer;
-        WorldClient world = mc.theWorld;
+        ItemStack held = mc.thePlayer.getHeldItem();
+        if (held == null) {
+            toggle();
+            return;
+        }
 
         int count = random.nextInt(31) + 1;
 
         for (int i = 0; i <= count; i++) {
-            ItemStack itemStack = mc.thePlayer.getHeldItem();
-            EntityItem entityItem = mc.thePlayer.dropItem(itemStack.copy(), false, true);
+            EntityItem entityItem = mc.thePlayer.dropItem(held.copy(), false, true);
             if (entityItem != null) mc.theWorld.addEntityToWorld(entityItem.getEntityId(), entityItem);
-
         }
+
+        toggle();
     }
 }
