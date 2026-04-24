@@ -1,0 +1,137 @@
+package proclient.module;
+
+import net.lax1dude.eaglercraft.v1_8.Mouse;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
+
+public class RenderModule extends Module {
+	
+	public boolean dragging = false;
+	
+	public RenderModule(String name, int k, Category cat, int x, int y, int width, int height) {
+		super(name, k, cat);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+	public RenderModule(String name, int k, Category cat, int x, int y, int width, int height, boolean blatant) {
+		super(name, k, cat, blatant);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.blatant = blatant;
+	}
+	
+	public int x,y,width,height;
+	public int lastX;
+	public int lastY;
+
+	public void draw() {
+		
+	}
+	
+	public void Resize() {
+		if((getX() + getWidth()) > Minecraft.getMinecraft().displayWidth) {
+			this.x = Minecraft.getMinecraft().displayWidth - getWidth();
+			dragging = false;
+		} else if ((getY() + getHeight()) > Minecraft.getMinecraft().displayHeight) {
+			this.y = Minecraft.getMinecraft().displayHeight - getHeight();
+			dragging = false;
+		} else if ((getX()) < 0) {
+			this.x = 0;
+			dragging = false;
+		} else if ((getY()) < 0) {
+			this.y = 0;
+			dragging = false;
+		} else if (getX() <= 0 && getY() < 0) {
+			this.y = 0;
+			this.x = 0;
+			dragging = false;
+		} else if (getX() + getWidth() > Minecraft.getMinecraft().displayWidth && getY() < 0) {
+			this.x = Minecraft.getMinecraft().displayWidth - getWidth();
+			this.y = 0;
+			dragging = false;
+		} else if (getX() + getWidth() > Minecraft.getMinecraft().displayWidth && getY() + getHeight() > Minecraft.getMinecraft().displayHeight) {
+			this.x = Minecraft.getMinecraft().displayWidth - getWidth();
+			this.y = Minecraft.getMinecraft().displayHeight - getHeight();
+			dragging = false;
+		} else if (getY() + getHeight() > Minecraft.getMinecraft().displayHeight && getX() < 0) {
+			this.x = Minecraft.getMinecraft().displayWidth - getWidth();
+			this.y = Minecraft.getMinecraft().displayHeight - getHeight();
+			dragging = false;
+		}
+	}
+	
+	private void draggingFix(int mouseX, int mouseY) {
+        if (this.dragging) {
+            this.x = mouseX + this.lastX;
+            this.y = mouseY + this.lastY;
+            if(!Mouse.isButtonDown(0)) this.dragging = false;
+            
+            if(this.x >= Minecraft.getMinecraft().displayWidth - getWidth()) {
+            	this.dragging = false;
+            }
+            if(this.y >= Minecraft.getMinecraft().displayHeight - getHeight()) {
+            	this.dragging = false;
+            }
+        }
+    }
+	
+	public void renderLayout(int mouseX, int mouseY) {
+		Resize();
+		boolean mouseOver = mouseX >= getX() && mouseY >= getY() && mouseX < getX() + getWidth() && mouseY < getY() + this.getHeight();
+		boolean mouseOverX = (mouseX >= this.x && mouseX <= this.x+this.getWidth()); 
+        boolean mouseOverY = (mouseY >= this.y && mouseY <= this.y+this.getHeight());
+        boolean drag = (mouseOverX && mouseOverY && Mouse.isButtonDown(0));
+        draggingFix(mouseX, mouseY);
+		if(drag) {
+        	if (!this.dragging) {
+        		this.lastX = x - mouseX;
+        		this.lastY = y - mouseY;
+        		this.dragging = true;
+        	}
+        }
+		draw();
+		Gui.drawRect(this.x, this.y, this.x + this.getWidth(), this.y+this.getHeight(), 0x50FFFFFF);
+		Gui.drawRect(this.x, this.y, this.x+this.getWidth(), this.y+1, 0xFFFFFFFF);
+		Gui.drawRect(this.x, this.y, this.x+1, this.y+getHeight(), 0xFFFFFFFF);
+		Gui.drawRect(this.x+this.getWidth()-1, this.y, this.x+getWidth(), this.y+this.getHeight(), 0xFFFFFFFF);
+		Gui.drawRect(this.x, this.y+this.getHeight()-1, this.x+getWidth(), this.y+this.getHeight(), 0xFFFFFFFF);
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+}

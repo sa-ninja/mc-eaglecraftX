@@ -1,0 +1,29 @@
+.gradle
+.settings
+.classpath
+.project
+bin
+/build
+/target_*/build
+/desktopRuntime/_eagstorage*
+/desktopRuntime/eclipseProject/bin*
+/desktopRuntime/hs_err_*
+/desktopRuntime/crash-reports/*
+/desktopRuntime/options.txt
+/desktopRuntime/_eagstorage*
+/desktopRuntime/filesystem/*
+/desktopRuntime/downloads/*
+/desktopRuntime/screenshots/*
+
+# Compiled web output (deploy branch only)
+/target_teavm_javascript/javascript/
+/target_teavm_javascript/javascript_dist/
+/target_teavm_wasm_gc/javascript/
+/target_teavm_wasm_gc/javascript_dist/
+
+# Desktop native libraries
+/desktopRuntime/natives/
+/desktopRuntime/*.jar
+
+# Claude session state
+.omc/
