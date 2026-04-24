@@ -16,7 +16,11 @@ bin
 /desktopRuntime/screenshots/*
 
 # Compiled web output (deploy branch only)
-/target_teavm_javascript/javascript/
+/target_teavm_javascript/javascript/classes.js
+/target_teavm_javascript/javascript/classes.js.map
+/target_teavm_javascript/javascript/*.html
+/target_teavm_javascript/javascript/*.epk
+/target_teavm_javascript/javascript/logs/
 /target_teavm_javascript/javascript_dist/
 /target_teavm_wasm_gc/javascript/
 /target_teavm_wasm_gc/javascript_dist/
