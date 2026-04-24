@@ -230,9 +230,7 @@ public class ContainerEnchantment extends Container {
 		int j = i + 1;
 		if ((itemstack1 == null || itemstack1.stackSize < j) && !entityplayer.capabilities.isCreativeMode) {
 			return false;
-		} else if (this.enchantLevels[i] > 0 && itemstack != null
-				&& (entityplayer.experienceLevel >= j && entityplayer.experienceLevel >= this.enchantLevels[i]
-						|| entityplayer.capabilities.isCreativeMode)) {
+		} else if (this.enchantLevels[i] > 0 && itemstack != null) {
 			if (!this.worldPointer.isRemote) {
 				List list = this.func_178148_a(itemstack, i, this.enchantLevels[i]);
 				boolean flag = itemstack.getItem() == Items.book;
