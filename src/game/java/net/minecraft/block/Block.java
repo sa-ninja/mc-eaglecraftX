@@ -462,6 +462,9 @@ public class Block {
 	 * rebuilding chunks for render
 	 */
 	public boolean isOpaqueCube() {
+		if (proclient.module.render.Xray.enabled && proclient.module.render.Xray.instance != null) {
+			return proclient.module.render.Xray.instance.shouldXrayBlock(this);
+		}
 		return true;
 	}
 
