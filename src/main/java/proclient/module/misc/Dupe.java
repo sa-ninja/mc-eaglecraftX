@@ -25,11 +25,9 @@ public class Dupe extends Module {
             return;
         }
 
-        int count = random.nextInt(31) + 1;
-
-        for (int i = 0; i <= count; i++) {
-            EntityItem entityItem = mc.thePlayer.dropItem(held.copy(), false, true);
-            if (entityItem != null) mc.theWorld.addEntityToWorld(entityItem.getEntityId(), entityItem);
+        int count = random.nextInt(5) + 1;
+        for (int i = 0; i < count; i++) {
+            mc.thePlayer.inventory.addItemStackToInventory(held.copy());
         }
 
         toggle();
